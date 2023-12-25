@@ -39,7 +39,7 @@ async def create_bot_alert(botalert: BotAlert):
         codename=botalert.codename,
         type=botalert.type
     ))
-
+    con.commit()
     if data.is_insert:
         return {
             'status': 'success',
