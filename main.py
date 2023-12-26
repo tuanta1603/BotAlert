@@ -2,6 +2,8 @@ from fastapi import FastAPI, HTTPException
 from schemas.bot_alert import BotAlert
 from config.db import con
 from models.index import bot_alert as model_bot_alert
+from okx_trading import PlaceOrder
+# from okx.PlaceOrder import place_order
 
 app = FastAPI()
 
@@ -31,13 +33,16 @@ async def create_bot_alert(botalert: BotAlert):
             codename=botalert.codename,
             type=botalert.type
         ))
+        place_order_result = PlaceOrder.place_order(
+            botalert=botalert
+        )
         con.commit()
 
-        # Check if the data was inserted successfully
-        if data.is_insert:
+        # Check if the data was inserted and the order was placed successfully
+        if data.is_insert and place_order_result:  # Update with the appropriate condition
             return {'status': 'success'}
         else:
-            raise HTTPException(status_code=500, detail='Failed to insert data into the database')
+            raise HTTPException(status_code=500, detail='Failed to insert data into the database or place order')
     except Exception as e:
         # Handle exceptions and provide appropriate error response
         return {'status': 'fail', 'error_message': str(e)}
