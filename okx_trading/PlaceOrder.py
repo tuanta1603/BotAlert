@@ -18,8 +18,7 @@ def place_order(botalert):
         # side="buy",
         # ordType="limit",
         # px="2.15",
-        # sz="2"
-
+        # sz="2" 
         # Production
         instId=botalert.ticker,
         tdMode="cash",  # Update with the appropriate value from botalert or use a default
