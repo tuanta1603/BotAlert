@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <style>
+    .btn-group .btn {
+      margin-right: 10px; /* Thay đổi giá trị margin-right theo ý muốn của bạn */
+    }
+  </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <h2>OKX</h2>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <form class="form-horizontal" action="/add_okx" method="post">
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="api_key">API Key:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="api_key" placeholder="" name="api_key">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="secret_key">API Secret:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="secret_key" placeholder="" name="secret_key">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="code">Code:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="code" placeholder="" name="code">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="total_balance">Total Balance:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="total_balance" placeholder="" name="total_balance">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="min_slot_play">Min slot play:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="min_slot_play" placeholder="" name="min_slot_play">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <!-- Button group for Start and Stop buttons with added spacing -->
+            <div class="btn-group">
+              <button type="submit" class="btn btn-success">Start</button>
+              <button type="submit" class="btn btn-danger">Stop</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Form 2 -->
+  <h2>BYBIT</h2>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <form class="form-horizontal" action="/action_page.php">
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="email2">API Key:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="email2" placeholder="" name="email2">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="pwd2">API Secret:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="pwd2" placeholder="" name="pwd2">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="code2">Code:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="code2" placeholder="" name="code">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="balance2">Total Balance:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="balance2" placeholder="" name="balance">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="slot2">Min slot play:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="slot2" placeholder="" name="slot">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <!-- Button group for Start and Stop buttons with added spacing -->
+            <div class="btn-group">
+              <button type="submit" class="btn btn-success">Start</button>
+              <button type="submit" class="btn btn-danger">Stop</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Form 3 -->
+  <h2>BITGET</h2>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <form class="form-horizontal" action="/action_page.php">
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="email2">API Key:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="email3" placeholder="" name="email2">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="pwd2">API Secret:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="pwd3" placeholder="" name="pwd2">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="code3">Code:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="code3" placeholder="" name="code">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="balance3">Total Balance:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="balance3" placeholder="" name="balance">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="slot3">Min slot play:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="slot3" placeholder="" name="slot">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <!-- Button group for Start and Stop buttons with added spacing -->
+            <div class="btn-group">
+              <button type="submit" class="btn btn-success">Start</button>
+              <button type="submit" class="btn btn-danger">Stop</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
