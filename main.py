@@ -5,6 +5,8 @@ from models.index import bot_alert as model_bot_alert
 from models.okx_user import okx_users as model_okx_user
 from okx_trading import OkxPlaceOrder
 from fastapi.templating import Jinja2Templates
+from sqlalchemy import select
+import asyncio
 
 from bybit_trading import BybitPlaceOrder
 
@@ -53,6 +55,11 @@ async def submit_okx_form(
 @app.post('/api/bot_alert')
 async def create_bot_alert(botalert: BotAlert):
     try:
+        # Select data from the okx_users table
+        users_data = con.execute(select(model_okx_user.columns).where(model_okx_user.c.status == 1)).fetchall()
+        if not users_data:
+            raise HTTPException(status_code=404, detail='User not found')
+
         # Insert data into the database
         data = con.execute(model_bot_alert.insert().values(
             syminfo=botalert.syminfo,
@@ -75,19 +82,32 @@ async def create_bot_alert(botalert: BotAlert):
             codename=botalert.codename,
             type=botalert.type
         ))
-        okx_place_order_result = OkxPlaceOrder.place_order(
-            botalert=botalert
-        )
-        # bybit_place_order_result = BybitPlaceOrder.place_order(
-        #     botalert=botalert
-        # )
+
+        async def place_order_for_user(user_data):
+            try:
+                return await OkxPlaceOrder.place_order(
+                    botalert=botalert,
+                    apikey=user_data.api_key,
+                    secretkey=user_data.secret_key,
+                    passphrase=user_data.secret_key,
+                    total_balance=user_data.total_balance,
+                    min_slot_play=user_data.min_slot_play
+                )
+            except Exception as e:
+                return f"Failed to place order for user {user_data.id}: {str(e)}"
+
+        # Use asyncio.gather to execute the asynchronous functions concurrently
+        results = await asyncio.gather(*(place_order_for_user(user_data) for user_data in users_data))
+
         con.commit()
 
-        # Check if the data was inserted and the order was placed successfully
-        if data.is_insert and okx_place_order_result:  # Update with the appropriate
+        # Check if the data was inserted and the orders were placed successfully
+        if data.is_insert and all(result for result in results):
             return {'status': 'success'}
         else:
             raise HTTPException(status_code=500, detail='Failed to insert data into the database or place order')
+
     except Exception as e:
         # Handle exceptions and provide appropriate error response
         return {'status': 'fail', 'error_message': str(e)}
+

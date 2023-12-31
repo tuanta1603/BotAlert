@@ -1,11 +1,7 @@
 import okx.Trade as Trade
 
 
-def place_order(botalert):
-    apikey = "3b906b00-776e-4ff0-8c30-738e97c8caab"
-    secretkey = "71FB64F6B47AAC190ECBB85D61B9A159"
-    passphrase = "Tk115@utehy"
-
+def place_order(botalert, apikey, secretkey, passphrase, total_balance, min_slot_play):
     flag = "1"  # Production trading: 0, Demo trading: 1
     trade_api = Trade.TradeAPI(apikey, secretkey, passphrase, False, flag)
 
@@ -28,5 +24,5 @@ def place_order(botalert):
         # px=botalert.prices_pos,
         # sz=botalert.pos_quantity
     )
-    print("111111111111111111111111111111111111",result)
+    print("result", result)
     return result
