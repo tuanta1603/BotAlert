@@ -9,12 +9,15 @@ def place_order(botalert, apikey, secretkey, passphrase, total_balance, min_slot
     result = trade_api.place_order(
         # Demo trading
         instId="BTC-USDT",
-        tdMode="cash",
+        tdMode="spot_isolated",
         clOrdId="b15",
-        side="buy",
+        side="buy", # lấy từ Position , nếu position là Long thì => Buy, còn Short là sell
         ordType="limit",
         px="2.15",
-        sz="2"
+        ordType="market",
+        posSide="", # lấy từ position = botalert['position']
+        sz="min_slot_play",  # 1% của tổng balance hiện có, nên phải get được current balance hiện có.
+        tpOrdPx=botalert['prices_tp'], 
         # Production
         # instId=botalert.ticker,
         # tdMode="cash",  # Update with the appropriate value from botalert or use a default
